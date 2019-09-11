@@ -46,7 +46,9 @@ public class main {
 // This is parameterized over a return type "<T>" which is in our case
 // simply a Double.
 
-class Interpreter extends AbstractParseTreeVisitor<String> implements datoVisitor<String> {
+class Interpreter extends AbstractParseTreeVisitor<String> 
+	implements datoVisitor<String>
+ {
 
     public String visitStart(datoParser.StartContext ctx){
 	return ctx.d.getText();

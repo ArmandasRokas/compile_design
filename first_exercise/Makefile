@@ -1,4 +1,4 @@
-antlr4 = java -jar /usr/local/lib/antlr-4.7-complete.jar
+antlr4 = java -jar /usr/local/lib/antlr-4.7.2-complete.jar
 SRCFILES = main.java
 GENERATED = datoListener.java datoBaseListener.java datoParser.java datoBaseVisitor.java datoVisitor.java datoLexer.java
 
