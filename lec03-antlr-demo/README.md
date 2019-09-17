@@ -1,3 +1,0 @@
-- `antlr4 -visitor simpleCalc.g4`
-- `make`
-- `make tree`
