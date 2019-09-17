@@ -86,7 +86,6 @@ public class datoParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-
 	public static class StartContext extends ParserRuleContext {
 		public Token d;
 		public TerminalNode EOF() { return getToken(datoParser.EOF, 0); }
@@ -102,11 +101,6 @@ public class datoParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof datoListener ) ((datoListener)listener).exitStart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof datoVisitor ) return ((datoVisitor<? extends T>)visitor).visitStart(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
