@@ -59,18 +59,27 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     public Double visitVariable(simpleCalcParser.VariableContext ctx){
 	System.err.println("Variables are not yet supported -- replacing by -1.0.\n");
 	return Double.valueOf(-1.0);
+	//return Double.valueOf(ctx.x.e.getText()); //not working
     };
     
     public Double visitAddition(simpleCalcParser.AdditionContext ctx){
-	if (ctx.op.getText().equals("+"))
+//	if (ctx.op.getText().equals("+"))
 	    return visit(ctx.e1)+visit(ctx.e2);
-	else
-	    return visit(ctx.e1)-visit(ctx.e2 );	    
+//	else
+//	    return visit(ctx.e1)-visit(ctx.e2 );	    
     };
+
+    public Double visitSubtraction(simpleCalcParser.SubtractionContext ctx){
+	return visit(ctx.e1)-visit(ctx.e2);
+    }
 
     public Double visitMultiplication(simpleCalcParser.MultiplicationContext ctx){
 	return visit(ctx.e1)*visit(ctx.e2);
     };
+
+    public Double visitDivision(simpleCalcParser.DivisionContext ctx){
+	return visit(ctx.e1)/visit(ctx.e2);
+    }
 
     public Double visitConstant(simpleCalcParser.ConstantContext ctx){
 	return Double.parseDouble(ctx.f.getText()); 
