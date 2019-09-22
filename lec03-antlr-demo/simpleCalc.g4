@@ -8,14 +8,14 @@ assign : x=ID '=' e=exp  ;
 
 exp : x=ID    	 # Variable
 | f=FLOAT	 # Constant
-| e1=exp '*' e2=exp   # Multiplication 
+| e1=exp op=OPMD e2=exp   # Multiplication 
 | e1=exp op=OP e2=exp   # Addition
 | '(' e=exp ')'	 # Parenthesis
 | op=OP f=FLOAT  # SignedConstant
 ;
 
 // Lexer:
-
+OPMD : ('/'|'*'); // modified
 OP : ('-'|'+') ;
 
 ID    : ALPHA (ALPHA|NUM)* ;

@@ -16,7 +16,7 @@ public class simpleCalcParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, OP=5, ID=6, FLOAT=7, ALPHA=8, NUM=9, WHITESPACE=10, 
+		T__0=1, T__1=2, T__2=3, OPMD=4, OP=5, ID=6, FLOAT=7, ALPHA=8, NUM=9, WHITESPACE=10, 
 		COMMENT=11, COMMENT2=12;
 	public static final int
 		RULE_start = 0, RULE_assign = 1, RULE_exp = 2;
@@ -29,14 +29,14 @@ public class simpleCalcParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'='", "'*'", "'('", "')'"
+			null, "'='", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, "OP", "ID", "FLOAT", "ALPHA", "NUM", "WHITESPACE", 
-			"COMMENT", "COMMENT2"
+			null, null, null, null, "OPMD", "OP", "ID", "FLOAT", "ALPHA", "NUM", 
+			"WHITESPACE", "COMMENT", "COMMENT2"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -248,6 +248,7 @@ public class simpleCalcParser extends Parser {
 	}
 	public static class MultiplicationContext extends ExpContext {
 		public ExpContext e1;
+		public Token op;
 		public ExpContext e2;
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
@@ -255,6 +256,7 @@ public class simpleCalcParser extends Parser {
 		public ExpContext exp(int i) {
 			return getRuleContext(ExpContext.class,i);
 		}
+		public TerminalNode OPMD() { return getToken(simpleCalcParser.OPMD, 0); }
 		public MultiplicationContext(ExpContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -390,17 +392,17 @@ public class simpleCalcParser extends Parser {
 				((ConstantContext)_localctx).f = match(FLOAT);
 				}
 				break;
-			case T__2:
+			case T__1:
 				{
 				_localctx = new ParenthesisContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(22);
-				match(T__2);
+				match(T__1);
 				setState(23);
 				((ParenthesisContext)_localctx).e = exp(0);
 				setState(24);
-				match(T__3);
+				match(T__2);
 				}
 				break;
 			case OP:
@@ -437,7 +439,7 @@ public class simpleCalcParser extends Parser {
 						setState(30);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(31);
-						match(T__1);
+						((MultiplicationContext)_localctx).op = match(OPMD);
 						setState(32);
 						((MultiplicationContext)_localctx).e2 = exp(5);
 						}
@@ -500,9 +502,9 @@ public class simpleCalcParser extends Parser {
 		"\2\2\2\6\36\3\2\2\2\b\n\5\4\3\2\t\b\3\2\2\2\n\r\3\2\2\2\13\t\3\2\2\2\13"+
 		"\f\3\2\2\2\f\16\3\2\2\2\r\13\3\2\2\2\16\17\5\6\4\2\17\20\7\2\2\3\20\3"+
 		"\3\2\2\2\21\22\7\b\2\2\22\23\7\3\2\2\23\24\5\6\4\2\24\5\3\2\2\2\25\26"+
-		"\b\4\1\2\26\37\7\b\2\2\27\37\7\t\2\2\30\31\7\5\2\2\31\32\5\6\4\2\32\33"+
-		"\7\6\2\2\33\37\3\2\2\2\34\35\7\7\2\2\35\37\7\t\2\2\36\25\3\2\2\2\36\27"+
-		"\3\2\2\2\36\30\3\2\2\2\36\34\3\2\2\2\37(\3\2\2\2 !\f\6\2\2!\"\7\4\2\2"+
+		"\b\4\1\2\26\37\7\b\2\2\27\37\7\t\2\2\30\31\7\4\2\2\31\32\5\6\4\2\32\33"+
+		"\7\5\2\2\33\37\3\2\2\2\34\35\7\7\2\2\35\37\7\t\2\2\36\25\3\2\2\2\36\27"+
+		"\3\2\2\2\36\30\3\2\2\2\36\34\3\2\2\2\37(\3\2\2\2 !\f\6\2\2!\"\7\6\2\2"+
 		"\"\'\5\6\4\7#$\f\5\2\2$%\7\7\2\2%\'\5\6\4\6& \3\2\2\2&#\3\2\2\2\'*\3\2"+
 		"\2\2(&\3\2\2\2()\3\2\2\2)\7\3\2\2\2*(\3\2\2\2\6\13\36&(";
 	public static final ATN _ATN =
