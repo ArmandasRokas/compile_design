@@ -1,6 +1,11 @@
 grammar simpleCalc;
 
-start   : (as+=assign)* e=exp EOF ;
+start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
+
+block : '{' stat* '}';
+
+stat:	'if' '(' exp CONDOP exp ')' stat
+	| assign;
 
 assign : x=ID '=' e=exp ';'  ;
 
@@ -19,7 +24,7 @@ exp : x=ID    	      # Variable
 // Lexer:
 // OPMD : ('/'|'*'); // modified
 OP : ('-'|'+') ;
-
+CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
 

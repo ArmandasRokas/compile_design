@@ -87,6 +87,9 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     public Double visitAssign(simpleCalcParser.AssignContext ctx){ return Double.valueOf(-1); };
 
+    public Double visitBlock(simpleCalcParser.BlockContext ctx){ return Double.valueOf(-1); };
+
+    public Double visitStat(simpleCalcParser.StatContext ctx){ return Double.valueOf(-1); };
 
     public Double visitSignedConstant(simpleCalcParser.SignedConstantContext ctx){ return Double.valueOf(-1); };
     
