@@ -37,6 +37,18 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitStat(simpleCalcParser.StatContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code BoolConst}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolConst(simpleCalcParser.BoolConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BoolConst}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolConst(simpleCalcParser.BoolConstContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code NotCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree

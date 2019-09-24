@@ -104,5 +104,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ return Double.valueOf(-1); };
     
     public Double visitParenthCondition(simpleCalcParser.ParenthConditionContext ctx){ return Double.valueOf(-1); };
+
+    public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ return Double.valueOf(-1); };
 }
 

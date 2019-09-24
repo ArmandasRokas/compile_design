@@ -13,7 +13,8 @@ stat:	block
 	| assign;
 
 condition: 
-	ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
+	b=BOOL 				# BoolConst
+	|ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
 	| '(' c=condition ')'		# ParenthCondition
 	| '!' c=condition 		# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
@@ -43,7 +44,7 @@ CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
-
+BOOL : ('true' | 'false');
 ALPHA : [a-zA-Z_ÆØÅæøå] ;
 NUM   : [0-9] ;
 
