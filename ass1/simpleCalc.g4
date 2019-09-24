@@ -5,16 +5,29 @@ start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 block : '{' stat* '}';
 
 stat:	block
-	|'if' ('!')?'(' condition (BOOLCON condition)*  ')' 
+	|'if' '(' condition  ')'
 		(stat | block) 
 		('else' (stat | block))?
-	| 'while' ('!')?'(' condition ( BOOLCON condition)* ')'
+	| 'while' '(' condition ( BOOLCON condition)* ')'
 		(stat | block )
 	| assign;
 
 condition: 
-	ce1=exp co=CONDOP ce2=exp # BoolCondition	
-	 ;
+	ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
+	| '!' c=condition 		# NotCondition
+	| '(' c=condition ')'		# ParenthCondition
+	| c1=condition '&&' c2=condition	# AndCondition
+	| c1=condition '||' c2=condition	# OrCondition
+	;
+
+//boolConnect:
+//	 c1=condition '||' c2=condition 	# AndConnect  
+//	| c1=condition '&&' c2=condition 	# OrConnect
+//	| '(' c=condition ')'		# ParenthesisConnect			
+//	| c=condition	#SingleCondition	
+//	| 
+//; 
+
 
 assign : x=ID '=' e=exp ';'  ;
 
