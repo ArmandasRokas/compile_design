@@ -4,8 +4,12 @@ start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 
 block : '{' stat* '}';
 
-stat:	'if' '(' exp CONDOP exp ')' (stat | block) ('else' (stat | block))?
+stat:	'if' '(' condition (CONDOP )?  ')' 
+		(stat | block) 
+		('else' (stat | block))?
 	| assign;
+
+condition: exp CONDOP exp;
 
 assign : x=ID '=' e=exp ';'  ;
 
@@ -25,6 +29,7 @@ exp : x=ID    	      # Variable
 // OPMD : ('/'|'*'); // modified
 OP : ('-'|'+') ;
 CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
+BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
 
