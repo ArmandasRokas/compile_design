@@ -4,7 +4,7 @@ start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 
 block : '{' stat* '}';
 
-stat:	'if' '(' exp CONDOP exp ')' stat
+stat:	'if' '(' exp CONDOP exp ')' (stat | block) ('else' (stat | block))?
 	| assign;
 
 assign : x=ID '=' e=exp ';'  ;
