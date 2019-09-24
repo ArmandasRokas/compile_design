@@ -2,7 +2,7 @@ grammar simpleCalc;
 
 start   : (as+=assign)* e=exp EOF ;
 
-assign : x=ID '=' e=exp  ;
+assign : x=ID '=' e=exp ';'  ;
 
 /* A grammar for arithmetic expressions */
 
