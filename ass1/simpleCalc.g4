@@ -8,7 +8,7 @@ stat:	block
 	|'if' '(' condition  ')'
 		(stat | block) 
 		('else' (stat | block))?
-	| 'while' '(' condition ( BOOLCON condition)* ')'
+	| 'while' '(' condition ')'
 		(stat | block )
 	| assign;
 
@@ -19,15 +19,6 @@ condition:
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
 	;
-
-//boolConnect:
-//	 c1=condition '||' c2=condition 	# AndConnect  
-//	| c1=condition '&&' c2=condition 	# OrConnect
-//	| '(' c=condition ')'		# ParenthesisConnect			
-//	| c=condition	#SingleCondition	
-//	| 
-//; 
-
 
 assign : x=ID '=' e=exp ';'  ;
 
