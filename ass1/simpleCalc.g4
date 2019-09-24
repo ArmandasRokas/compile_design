@@ -14,8 +14,8 @@ stat:	block
 
 condition: 
 	ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
-	| '!' c=condition 		# NotCondition
 	| '(' c=condition ')'		# ParenthCondition
+	| '!' c=condition 		# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
 	;

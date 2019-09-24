@@ -575,26 +575,26 @@ public class simpleCalcParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new NotConditionContext(_localctx);
+				_localctx = new ParenthConditionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(68);
-				match(T__7);
+				match(T__3);
 				setState(69);
-				((NotConditionContext)_localctx).c = condition(4);
+				((ParenthConditionContext)_localctx).c = condition(0);
+				setState(70);
+				match(T__4);
 				}
 				break;
 			case 3:
 				{
-				_localctx = new ParenthConditionContext(_localctx);
+				_localctx = new NotConditionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(70);
-				match(T__3);
-				setState(71);
-				((ParenthConditionContext)_localctx).c = condition(0);
 				setState(72);
-				match(T__4);
+				match(T__7);
+				setState(73);
+				((NotConditionContext)_localctx).c = condition(3);
 				}
 				break;
 			}
@@ -1095,8 +1095,8 @@ public class simpleCalcParser extends Parser {
 		"\2\66\67\7\t\2\2\678\7\6\2\289\5\b\5\29<\7\7\2\2:=\5\6\4\2;=\5\4\3\2<"+
 		":\3\2\2\2<;\3\2\2\2=@\3\2\2\2>@\5\n\6\2?&\3\2\2\2?\'\3\2\2\2?\66\3\2\2"+
 		"\2?>\3\2\2\2@\7\3\2\2\2AB\b\5\1\2BC\5\f\7\2CD\7\24\2\2DE\5\f\7\2EM\3\2"+
-		"\2\2FG\7\n\2\2GM\5\b\5\6HI\7\6\2\2IJ\5\b\5\2JK\7\7\2\2KM\3\2\2\2LA\3\2"+
-		"\2\2LF\3\2\2\2LH\3\2\2\2MV\3\2\2\2NO\f\4\2\2OP\7\13\2\2PU\5\b\5\5QR\f"+
+		"\2\2FG\7\6\2\2GH\5\b\5\2HI\7\7\2\2IM\3\2\2\2JK\7\n\2\2KM\5\b\5\5LA\3\2"+
+		"\2\2LF\3\2\2\2LJ\3\2\2\2MV\3\2\2\2NO\f\4\2\2OP\7\13\2\2PU\5\b\5\5QR\f"+
 		"\3\2\2RS\7\f\2\2SU\5\b\5\4TN\3\2\2\2TQ\3\2\2\2UX\3\2\2\2VT\3\2\2\2VW\3"+
 		"\2\2\2W\t\3\2\2\2XV\3\2\2\2YZ\7\26\2\2Z[\7\r\2\2[\\\5\f\7\2\\]\7\16\2"+
 		"\2]\13\3\2\2\2^_\b\7\1\2_h\7\26\2\2`h\7\27\2\2ab\7\6\2\2bc\5\f\7\2cd\7"+
