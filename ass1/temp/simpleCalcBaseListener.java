@@ -51,13 +51,13 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCondition(simpleCalcParser.ConditionContext ctx) { }
+	@Override public void enterBoolCondition(simpleCalcParser.BoolConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCondition(simpleCalcParser.ConditionContext ctx) { }
+	@Override public void exitBoolCondition(simpleCalcParser.BoolConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

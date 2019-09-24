@@ -28,11 +28,12 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(simpleCalcParser.StatContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleCalcParser#condition}.
+	 * Visit a parse tree produced by the {@code BoolCondition}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondition(simpleCalcParser.ConditionContext ctx);
+	T visitBoolCondition(simpleCalcParser.BoolConditionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleCalcParser#assign}.
 	 * @param ctx the parse tree

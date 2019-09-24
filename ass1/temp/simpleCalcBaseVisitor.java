@@ -37,7 +37,7 @@ public class simpleCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondition(simpleCalcParser.ConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBoolCondition(simpleCalcParser.BoolConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

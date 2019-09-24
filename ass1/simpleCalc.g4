@@ -4,12 +4,17 @@ start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 
 block : '{' stat* '}';
 
-stat:	'if' '(' condition (CONDOP )?  ')' 
+stat:	block
+	|'if' ('!')?'(' condition (BOOLCON condition)*  ')' 
 		(stat | block) 
 		('else' (stat | block))?
+	| 'while' ('!')?'(' condition ( BOOLCON condition)* ')'
+		(stat | block )
 	| assign;
 
-condition: exp CONDOP exp;
+condition: 
+	ce1=exp co=CONDOP ce2=exp # BoolCondition	
+	 ;
 
 assign : x=ID '=' e=exp ';'  ;
 
@@ -24,6 +29,8 @@ exp : x=ID    	      # Variable
 | '(' e=exp ')'	      # Parenthesis
 | op=OP f=FLOAT       # SignedConstant
 ;
+
+
 
 // Lexer:
 // OPMD : ('/'|'*'); // modified
