@@ -2,12 +2,12 @@ grammar simpleCalc;
 
 start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 
-block : '{' stat* '}';
+block : '{' stat* '}'; // ASK: should I visit this to? Should it has a label too?
 
 stat:	block
 	|'if' '(' condition  ')'
 		(stat | block) 
-		('else' (stat | block))?
+		('else' (stat | block))? // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
 	| 'while' '(' condition ')'
 		(stat | block )
 	| assign;

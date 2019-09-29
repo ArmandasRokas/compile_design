@@ -3,6 +3,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import org.antlr.v4.runtime.CharStreams;
 import java.io.IOException;
+import java.util.*;
 
 public class main {
     public static void main(String[] args) throws IOException{
@@ -48,26 +49,46 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalcVisitor<Double> {
 
-    public Double visitStart(simpleCalcParser.StartContext ctx){
-	return visit(ctx.e);
-    };
+	// An environment mapping variablenames to double values (initially empty) 
+	public static HashMap<String,Double> env = new HashMap<String, Double>();
 
-    public Double visitParenthesis(simpleCalcParser.ParenthesisContext ctx){
-	return visit(ctx.e);
-    };
+    	public Double visitStart(simpleCalcParser.StartContext ctx){	
+		// Visit all assignments:
+		for(simpleCalcParser.AssignContext a: ctx.as){
+			visit(a);// Is this invokes visitAssign()????
+		       		// Is 'a' a parse tree?	
+		}
+	    	return visit(ctx.e);
+    	};
+
+    	public Double visitParenthesis(simpleCalcParser.ParenthesisContext ctx){
+		return visit(ctx.e);
+    	};
     
-    public Double visitVariable(simpleCalcParser.VariableContext ctx){
-	System.err.println("Variables are not yet supported -- replacing by -1.0.\n");
-	return Double.valueOf(-1.0);
-	//return Double.valueOf(ctx.x.e.getText()); //not working
-    };
+    	public Double visitVariable(simpleCalcParser.VariableContext ctx){
+		// Look up the value of the variable in the environment env:
+		String varname = ctx.x.getText();
+		Double d = env.get(varname);
+		if (d==null){
+			System.err.println("Variable " + varname + " is not defined. \n");
+			System.exit(-1);
+		}
+	    	return d;
+    	};
     
-    public Double visitAddition(simpleCalcParser.AdditionContext ctx){
-//	if (ctx.op.getText().equals("+"))
-	    return visit(ctx.e1)+visit(ctx.e2);
-//	else
-//	    return visit(ctx.e1)-visit(ctx.e2 );	    
-    };
+    	public Double visitAssign(simpleCalcParser.AssignContext ctx){ 
+		String varname = ctx.x.getText();
+		Double v = visit(ctx.e);
+		env.put(varname, v);
+		return v; 
+	};
+    	
+	public Double visitAddition(simpleCalcParser.AdditionContext ctx){
+	//	if (ctx.op.getText().equals("+"))
+	    	return visit(ctx.e1)+visit(ctx.e2);
+	//	else
+	//	    return visit(ctx.e1)-visit(ctx.e2 );	    
+    	};
 
     public Double visitSubtraction(simpleCalcParser.SubtractionContext ctx){
 	return visit(ctx.e1)-visit(ctx.e2);
@@ -85,7 +106,6 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	return Double.parseDouble(ctx.f.getText()); 
     };
 
-    public Double visitAssign(simpleCalcParser.AssignContext ctx){ return Double.valueOf(-1); };
 
     public Double visitBlock(simpleCalcParser.BlockContext ctx){ return Double.valueOf(-1); };
 
