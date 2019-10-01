@@ -5,16 +5,19 @@ start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
 block : '{' stat* '}'; // ASK: should I visit this to? Should it has a label too?
 
 stat:	block
-	|'if' '(' condition  ')'
+	|'if' '(' condition  ')' 
 		(stat | block) 
-		('else' (stat | block))? // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
+		('else' (stat | block))?  // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
 	| 'while' '(' condition ')'
 		(stat | block )
 	| assign;
 
+
+
 condition: 
 	b=BOOL 				# BoolConst
 	|ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
+	// |ce1=exp '>' ce2=exp 	# GreaterThan 
 	| '(' c=condition ')'		# ParenthCondition
 	| '!' c=condition 		# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
@@ -33,12 +36,20 @@ exp : x=ID    	      # Variable
 | e1=exp '-' e2=exp   # Subtraction
 | '(' e=exp ')'	      # Parenthesis
 | op=OP f=FLOAT       # SignedConstant
+| e1=exp op=(LTEQ | GTEQ | LT | GT) e2=exp	# Relational
+| e1=exp op=(EQ | NEQ) e1=exp 	# Equality
 ;
 
 
 
 // Lexer:
 // OPMD : ('/'|'*'); // modified
+EQ: '==';
+NEQ: '!=';
+GT: '>';
+LT: '<';
+GTEQ: '>=';
+LTEQ: '<=';
 OP : ('-'|'+') ;
 CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
