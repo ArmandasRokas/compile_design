@@ -16,17 +16,40 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(simpleCalcParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleCalcParser#block}.
+	 * Visit a parse tree produced by the {@code OneStat}
+	 * labeled alternative in {@link simpleCalcParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlock(simpleCalcParser.BlockContext ctx);
+	T visitOneStat(simpleCalcParser.OneStatContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleCalcParser#stat}.
+	 * Visit a parse tree produced by the {@code MultiStat}
+	 * labeled alternative in {@link simpleCalcParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStat(simpleCalcParser.StatContext ctx);
+	T visitMultiStat(simpleCalcParser.MultiStatContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code If_stat}
+	 * labeled alternative in {@link simpleCalcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_stat(simpleCalcParser.If_statContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code While_stat}
+	 * labeled alternative in {@link simpleCalcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile_stat(simpleCalcParser.While_statContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Assign}
+	 * labeled alternative in {@link simpleCalcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign(simpleCalcParser.AssignContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code BoolConst}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
@@ -69,12 +92,6 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAndCondition(simpleCalcParser.AndConditionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link simpleCalcParser#assign}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssign(simpleCalcParser.AssignContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Parenthesis}
 	 * labeled alternative in {@link simpleCalcParser#exp}.

@@ -1,16 +1,18 @@
 grammar simpleCalc;
 
-start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
+start   : b=block  e=exp EOF ; // hvad betyder + her??
 
-block : '{' stat* '}'; // ASK: should I visit this to? Should it has a label too?
+block : s=stat # OneStat // visit s
+	| '{' ss+=stat* '}' # MultiStat // visit all in the list // ASK: should I visit this to? Should it has a label too?
+	;	
 
-stat:	block
-	|'if' '(' condition  ')'
-		(stat | block) 
-		('else' (stat | block))? // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
-	| 'while' '(' condition ')'
-		(stat | block )
-	| assign;
+stat:
+	'if' '(' c=condition  ')'
+		(b1=block) 
+		'else' (b2=block) # If_stat // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
+	| 'while' '(' c=condition ')' b1=block # While_stat
+	| x=ID '=' e=exp ';' # Assign
+;
 
 condition: 
 	b=BOOL 				# BoolConst
@@ -21,7 +23,7 @@ condition:
 	| c1=condition '||' c2=condition	# OrCondition
 	;
 
-assign : x=ID '=' e=exp ';'  ;
+// assign : x=ID '=' e=exp ';'  ;
 
 /* A grammar for arithmetic expressions */
 

@@ -149,8 +149,5 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    }
 	    //return Double.valueOf(-1); 
     };
-
-
-    public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ return Double.valueOf(-1); };
 }
 

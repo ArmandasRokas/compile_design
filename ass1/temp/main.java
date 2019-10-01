@@ -54,12 +54,24 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     	public Double visitStart(simpleCalcParser.StartContext ctx){	
 		// Visit all assignments:
-		for(simpleCalcParser.AssignContext a: ctx.as){
-			visit(a);// Is this invokes visitAssign()????
+		//for(simpleCalcParser.AssignContext a: ctx.as){
+		//	visit(a);// Is this invokes visitAssign()????
 		       		// Is 'a' a parse tree?	
-		}
+	//	}
+		visit(ctx.b);
 	    	return visit(ctx.e);
     	};
+
+
+    	public Double visitOneStat(simpleCalcParser.OneStatContext ctx){ 
+		return Double.valueOf(-1); };
+
+    public Double visitMultiStat(simpleCalcParser.MultiStatContext ctx){ 
+	    for(simpleCalcParser.StatContext s: ctx.ss){
+		visit(s);
+	    }
+	    return Double.valueOf(-1); };
+
 
     	public Double visitParenthesis(simpleCalcParser.ParenthesisContext ctx){
 		return visit(ctx.e);
@@ -107,11 +119,13 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     };
 
 
-    public Double visitBlock(simpleCalcParser.BlockContext ctx){ return Double.valueOf(-1); };
+    //public Double visitBlock(simpleCalcParser.BlockContext ctx){ return Double.valueOf(-1); };
 
     public Double visitStat(simpleCalcParser.StatContext ctx){ return Double.valueOf(-1); };
 
-    public Double visitCondition(simpleCalcParser.ConditionContext ctx){ return Double.valueOf(-1); };
+    public Double visitCondition(simpleCalcParser.ConditionContext ctx){ 
+	    return Double.valueOf(-1); 
+    };
 
     public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
 
@@ -126,5 +140,17 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     public Double visitParenthCondition(simpleCalcParser.ParenthConditionContext ctx){ return Double.valueOf(-1); };
 
     public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ return Double.valueOf(-1); };
+    public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
+	    Double c = visit(ctx.c);
+	    if(c.equals(1)){
+		return visit(ctx.b1);
+	    } else {
+		return visit(ctx.b2);
+	    }
+	    //return Double.valueOf(-1); 
+    };
+
+
+    public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ return Double.valueOf(-1); };
 }
 
