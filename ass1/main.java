@@ -119,6 +119,13 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     };
 
 
+    public Double visitEquals(simpleCalcParser.EqualsContext ctx){ 
+	    if(visit(ctx.e1).equals(visit(ctx.e2))){
+		return Double.parseDouble("1");
+	    } else {
+		return Double.parseDouble("0");
+	    }
+    };
     //public Double visitBlock(simpleCalcParser.BlockContext ctx){ return Double.valueOf(-1); };
 
     public Double visitStat(simpleCalcParser.StatContext ctx){ return Double.valueOf(-1); };
@@ -142,7 +149,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ return Double.valueOf(-1); };
     public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
 	    Double c = visit(ctx.c);
-	    if(c.equals(1)){
+	    if(c.equals(1.0)){
 		return visit(ctx.b1);
 	    } else {
 		return visit(ctx.b2);

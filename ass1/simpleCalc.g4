@@ -21,6 +21,7 @@ condition:
 	| '!' c=condition 		# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
+	| e1=exp '==' e2=exp		# Equals
 	;
 
 // assign : x=ID '=' e=exp ';'  ;
@@ -42,7 +43,7 @@ exp : x=ID    	      # Variable
 // Lexer:
 // OPMD : ('/'|'*'); // modified
 OP : ('-'|'+') ;
-CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
+CONDOP: ( '!=' | '<' | '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
