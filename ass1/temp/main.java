@@ -78,6 +78,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     
     	public Double visitAssign(simpleCalcParser.AssignContext ctx){ 
 		String varname = ctx.x.getText();
+		System.out.println("Found: " + varname);
 		Double v = visit(ctx.e);
 		env.put(varname, v);
 		return v; 
@@ -111,20 +112,24 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     public Double visitStat(simpleCalcParser.StatContext ctx){ return Double.valueOf(-1); };
 
-    public Double visitCondition(simpleCalcParser.ConditionContext ctx){ return Double.valueOf(-1); };
-
-    public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
-
     public Double visitSignedConstant(simpleCalcParser.SignedConstantContext ctx){ return Double.valueOf(-1); };
 	
-    public Double visitAndCondition(simpleCalcParser.AndConditionContext ctx){ return Double.valueOf(-1); };
+    public Double visitNot(simpleCalcParser.NotContext ctx){ return Double.valueOf(-1); };
 
-    public Double visitOrCondition(simpleCalcParser.OrConditionContext ctx){ return Double.valueOf(-1); };
-
-    public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ return Double.valueOf(-1); };
+    public Double visitRelational(simpleCalcParser.RelationalContext ctx){ return Double.valueOf(-1); };
     
-    public Double visitParenthCondition(simpleCalcParser.ParenthConditionContext ctx){ return Double.valueOf(-1); };
-
-    public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ return Double.valueOf(-1); };
+    public Double visitEquality(simpleCalcParser.EqualityContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitAnd(simpleCalcParser.AndContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitOr(simpleCalcParser.OrContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitCondition_block(simpleCalcParser.Condition_blockContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitStat_block(simpleCalcParser.Stat_blockContext ctx){ return Double.valueOf(-1); };
+    
+    public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ return Double.valueOf(-1); };
 }
 

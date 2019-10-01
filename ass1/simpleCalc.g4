@@ -1,45 +1,53 @@
 grammar simpleCalc;
 
-start   : (bs+=block)*  (as+=assign)* e=exp EOF ; // hvad betyder + her??
+start   : (as+=assign)* (bs+=stat_block)*   e=exp EOF ; // hvad betyder + her??
 
-block : '{' stat* '}'; // ASK: should I visit this to? Should it has a label too?
+// block : '{' stat* '}'; // ASK: should I visit this to? Should it has a label too?
 
-stat:	block
-	|'if' '(' condition  ')' 
-		(stat | block) 
-		('else' (stat | block))?  // ASK: should it has else like this or should I create a seperate alternative, that has if and else without question mark
-	| 'while' '(' condition ')'
-		(stat | block )
-	| assign;
+block : stat*;
+
+stat: 	assign
+	| if_stat
+	| while_stat;
 
 
 
-condition: 
-	b=BOOL 				# BoolConst
-	|ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
-	// |ce1=exp '>' ce2=exp 	# GreaterThan 
-	| '(' c=condition ')'		# ParenthCondition
-	| '!' c=condition 		# NotCondition
-	| c1=condition '&&' c2=condition	# AndCondition
-	| c1=condition '||' c2=condition	# OrCondition
-	;
+//condition: 
+//	b=BOOL 				# BoolConst
+//	|ce1=exp co=CONDOP ce2=exp 	# BoolCondition	
+//	// |ce1=exp '>' ce2=exp 	# GreaterThan 
+//	| '(' c=condition ')'		# ParenthCondition
+//	| '!' c=condition 		# NotCondition
+//	| c1=condition '&&' c2=condition	# AndCondition
+//	| c1=condition '||' c2=condition	# OrCondition
+//	;
 
 assign : x=ID '=' e=exp ';'  ;
 
-/* A grammar for arithmetic expressions */
+if_stat : 'if' condition_block ('else' stat_block)?;
 
-exp : x=ID    	      # Variable
-| f=FLOAT	      # Constant
+condition_block: exp stat_block;
+
+stat_block : '{' block '}'
+		| stat;
+
+while_stat : 'while' exp stat_block;
+
+exp :	 
+ op=OP f=FLOAT		# SignedConstant
+| NOT e1=exp		# Not
 | e1=exp '*' e2=exp   # Multiplication
 | e1=exp '/' e2=exp   # Division
 | e1=exp '+' e2=exp   # Addition
 | e1=exp '-' e2=exp   # Subtraction
 | '(' e=exp ')'	      # Parenthesis
-| op=OP f=FLOAT       # SignedConstant
 | e1=exp op=(LTEQ | GTEQ | LT | GT) e2=exp	# Relational
 | e1=exp op=(EQ | NEQ) e1=exp 	# Equality
+| e1=exp AND e2=exp 	# And
+| e2=exp OR e2=exp  	# Or
+| x=ID			# Variable
+| f=FLOAT 		# Constant
 ;
-
 
 
 // Lexer:
@@ -50,6 +58,9 @@ GT: '>';
 LT: '<';
 GTEQ: '>=';
 LTEQ: '<=';
+OR: '||';
+AND: '&&';
+NOT: '!';
 OP : ('-'|'+') ;
 CONDOP: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
