@@ -1,6 +1,8 @@
+// ASK1: Hvordan kan jeg tillade block i block?
+
 grammar simpleCalc;
 
-start   : b=block  e=exp EOF ; // hvad betyder + her??
+start   : b=block  e=exp EOF ; 
 
 block : s=stat # OneStat // visit s
 	| '{' ss+=stat* '}' # MultiStat // visit all in the list // ASK: should I visit this to? Should it has a label too?

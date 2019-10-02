@@ -149,7 +149,6 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ return Double.valueOf(-1); };
     public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
 	    Double c = visit(ctx.c);
-	    System.out.println(c);
 	    if(c.equals(1.0)){
 		return visit(ctx.b1);
 	    } else {
