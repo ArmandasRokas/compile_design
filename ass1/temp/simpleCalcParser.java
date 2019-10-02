@@ -366,16 +366,12 @@ public class simpleCalcParser extends Parser {
 				((If_statContext)_localctx).c = condition(0);
 				setState(28);
 				match(T__4);
-				{
 				setState(29);
 				((If_statContext)_localctx).b1 = block();
-				}
 				setState(30);
 				match(T__5);
-				{
 				setState(31);
 				((If_statContext)_localctx).b2 = block();
-				}
 				}
 				break;
 			case T__6:
