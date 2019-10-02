@@ -53,24 +53,23 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	public static HashMap<String,Double> env = new HashMap<String, Double>();
 
     	public Double visitStart(simpleCalcParser.StartContext ctx){	
-		// Visit all assignments:
-		//for(simpleCalcParser.AssignContext a: ctx.as){
-		//	visit(a);// Is this invokes visitAssign()????
-		       		// Is 'a' a parse tree?	
-	//	}
 		visit(ctx.b);
 	    	return visit(ctx.e);
     	};
 
 
     	public Double visitOneStat(simpleCalcParser.OneStatContext ctx){ 
-		return Double.valueOf(-1); };
+		return visit(ctx.s);
+		//return Double.valueOf(-1); 
+	};
 
-    public Double visitMultiStat(simpleCalcParser.MultiStatContext ctx){ 
-	    for(simpleCalcParser.StatContext s: ctx.ss){
-		visit(s);
-	    }
-	    return Double.valueOf(-1); };
+    	public Double visitMultiStat(simpleCalcParser.MultiStatContext ctx){ 
+	    	// Visit all statements
+	    	for(simpleCalcParser.StatContext s: ctx.ss){
+			visit(s);
+	    	}
+	    	return Double.valueOf(-1); 
+	};
 
 
     	public Double visitParenthesis(simpleCalcParser.ParenthesisContext ctx){
