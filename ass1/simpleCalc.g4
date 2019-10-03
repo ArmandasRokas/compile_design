@@ -17,13 +17,15 @@ stat:
 	;
 
 condition: 
-	b=BOOL 					# BoolConst
-	|ce1=exp co=CONDOP ce2=exp 		# BoolCondition	
+	//|b=BOOL 				# BoolConst
+	ce1=exp co=CONDOP ce2=exp 		# BoolCondition	
 	| '(' c=condition ')'			# ParenthCondition
 	| '!' c=condition 			# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
 	| e1=exp '==' e2=exp			# Equals
+	|'true'					# TrueCondition
+	| 'false'				# FalseCondition
 	;
 
 
@@ -49,7 +51,7 @@ CONDOP: ( '!=' | '<' | '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
-BOOL : ('true' | 'false');
+//BOOL : ('true' | 'false');
 ALPHA : [a-zA-Z_ÆØÅæøå] ;
 NUM   : [0-9] ;
 
