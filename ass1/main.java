@@ -124,14 +124,6 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    	}
     	}
 	
-/*
-    	public Double visitBoolConst(simpleCalcParser.BoolConstContext ctx){ 
-		if(ctx.b.getText().equals("true")){
-			System.out.println("true");
-		}		
-		return Double.valueOf(-1); 
-	};
-  */  	
 	public Double visitTrueCondition(simpleCalcParser.TrueConditionContext ctx){
 	       	return Double.valueOf(1); 
 	};
@@ -140,11 +132,19 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		return Double.valueOf(0); 
 	};
 	
+    	public Double visitAndCondition(simpleCalcParser.AndConditionContext ctx){ 
+		Double c1 = visit(ctx.c1);
+		Double c2 = visit(ctx.c2);
+		if(c1.equals(1.0) && c2.equals(1.0)){
+			return Double.valueOf(1.0);
+		} else{	
+			return Double.valueOf(0.0);
+		}	
+	};
     	public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
 
     public Double visitSignedConstant(simpleCalcParser.SignedConstantContext ctx){ return Double.valueOf(-1); };
 	
-    public Double visitAndCondition(simpleCalcParser.AndConditionContext ctx){ return Double.valueOf(-1); };
 
     public Double visitOrCondition(simpleCalcParser.OrConditionContext ctx){ return Double.valueOf(-1); };
 
