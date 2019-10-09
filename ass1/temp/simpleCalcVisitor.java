@@ -58,6 +58,13 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEquals(simpleCalcParser.EqualsContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code LessThan}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLessThan(simpleCalcParser.LessThanContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code NotCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree
@@ -99,6 +106,13 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBoolCondition(simpleCalcParser.BoolConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NotEquals}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotEquals(simpleCalcParser.NotEqualsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AndCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.

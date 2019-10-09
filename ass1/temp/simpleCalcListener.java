@@ -89,6 +89,18 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitEquals(simpleCalcParser.EqualsContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code LessThan}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterLessThan(simpleCalcParser.LessThanContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LessThan}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitLessThan(simpleCalcParser.LessThanContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code NotCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree
@@ -160,6 +172,18 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBoolCondition(simpleCalcParser.BoolConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NotEquals}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotEquals(simpleCalcParser.NotEqualsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NotEquals}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotEquals(simpleCalcParser.NotEqualsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AndCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.

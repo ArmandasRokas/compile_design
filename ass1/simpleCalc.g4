@@ -5,6 +5,7 @@ grammar simpleCalc;
 
 start   : b=block  e=exp EOF ; 
 
+// skal udkommenteres
 block : 
 	s=stat 			# OneStat	// visit s
 	| '{' ss+=stat* '}' 	# MultiStat 	// visit all in the list 
@@ -12,9 +13,11 @@ block :
 
 stat:
 	'if' '(' c=condition  ')' b1=block 'else' b2=block 	# If_stat
+	// |  if 						# If_else_stat
 	| 'while' '(' c=condition ')' b1=block 			# While_stat
 	| x=ID '=' e=exp ';' 					# Assign
-	;
+	//| '{' ss+=stat* '}'					# Block
+;
 
 condition: 
 	//|b=BOOL 				# BoolConst
@@ -24,6 +27,8 @@ condition:
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
 	| e1=exp '==' e2=exp			# Equals
+	| e1=exp '!=' e2=exp			# NotEquals
+	| e1=exp '<'  e2=exp			# LessThan
 	|'true'					# TrueCondition
 	| 'false'				# FalseCondition
 	;

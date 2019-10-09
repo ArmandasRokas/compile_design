@@ -36,8 +36,10 @@ public class main {
 
 	// Construct an interpreter and run it on the parse tree
 	Interpreter interpreter = new Interpreter();
+	//AST result = interpreter.visit(parseTree);
+	//System.out.println("The result is: "+ result.eval(new Environment()));
+
 	Double result=interpreter.visit(parseTree);
-	
 	System.out.println("The result is: "+result);
     }
 }
@@ -67,7 +69,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    	for(simpleCalcParser.StatContext s: ctx.ss){
 			visit(s);
 	    	}
-	    	return Double.valueOf(-1); // ASK: hvad skal jeg returnere her? 
+	    	return null; 
 	}
 
 
@@ -118,11 +120,27 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     	public Double visitEquals(simpleCalcParser.EqualsContext ctx){ 
 	    	if(visit(ctx.e1).equals(visit(ctx.e2))){
-			return Double.parseDouble("1");
+			return Double.valueOf(1);
 	    	} else {
-			return Double.parseDouble("0");
+			return Double.valueOf(0);
 	    	}
     	}
+    	
+	public Double visitNotEquals(simpleCalcParser.NotEqualsContext ctx){ 
+		if(visit(ctx.e1).equals(visit(ctx.e2))){
+			return Double.valueOf(0);
+		} else {
+			return Double.valueOf(1); 
+		}
+	};
+
+	public Double visitLessThan(simpleCalcParser.LessThanContext ctx){ 
+		if(visit(ctx.e1) < visit(ctx.e2)){
+			return Double.valueOf(1);
+		} else {
+			return Double.valueOf(0);
+		}
+	};
 	
 	public Double visitTrueCondition(simpleCalcParser.TrueConditionContext ctx){
 	       	return Double.valueOf(1); 
@@ -141,16 +159,32 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 			return Double.valueOf(0.0);
 		}	
 	};
+    	
+	public Double visitOrCondition(simpleCalcParser.OrConditionContext ctx){ 
+		Double c1 = visit(ctx.c1);
+		Double c2 = visit(ctx.c2);
+		if(c1.equals(1.0) || c2.equals(1.0)){
+			return Double.valueOf(1.0);
+		} else {	
+			return Double.valueOf(0.0);
+		}	
+	};
+
     	public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
 
     public Double visitSignedConstant(simpleCalcParser.SignedConstantContext ctx){ return Double.valueOf(-1); };
-	
 
-    public Double visitOrCondition(simpleCalcParser.OrConditionContext ctx){ return Double.valueOf(-1); };
-
-    public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ return Double.valueOf(-1); };
+    public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ 
+	    if(visit(ctx.c).equals(1.0)){
+		return Double.valueOf(0.0);
+	    } else {
+		return Double.valueOf(1.0);
+	    }
+    };
     
-    public Double visitParenthCondition(simpleCalcParser.ParenthConditionContext ctx){ return Double.valueOf(-1); };
+    public Double visitParenthCondition(simpleCalcParser.ParenthConditionContext ctx){ 
+	    return visit(ctx.c); 
+    };
 
     public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
 	    Double c = visit(ctx.c);
@@ -159,10 +193,17 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    } else {
 		return visit(ctx.b2);
 	    }
-	    //return Double.valueOf(-1); 
     };
 
 
-    public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ return Double.valueOf(-1); };
+    public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ 
+	    Double c = visit(ctx.c);
+	    while (c.equals(1.0)){
+		 visit(ctx.b1);
+		 c = visit(ctx.c); 
+	    }
+	    
+	    return null; // Hvad skal man returere her? 
+    }; 
 }
 
