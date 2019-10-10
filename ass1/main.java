@@ -174,8 +174,14 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     public Double visitSignedConstant(simpleCalcParser.SignedConstantContext ctx){ return Double.valueOf(-1); };
     
+    public Double visitUnary(simpleCalcParser.UnaryContext ctx){
+	   		visit(ctx.e); 
+	    	    	return null;
+	
+
+    };
+    
     public Double visitIncrement(simpleCalcParser.IncrementContext ctx){ 
-		
 	    	String varname = ctx.x.getText();
 		
 		Double d = env.get(varname);
@@ -186,9 +192,26 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		
 		d++;
 		env.put(varname, d);
-	    	return d;
+
+		return d;
 	
  
+    };
+
+
+    public Double visitDecrement(simpleCalcParser.DecrementContext ctx){ 
+	    	String varname = ctx.x.getText();
+		
+		Double d = env.get(varname);
+		if (d==null){
+			System.err.println("Variable " + varname + " is not defined. \n");
+			System.exit(-1);
+		}
+		
+		d--;
+		env.put(varname, d);
+
+		return d;
     };
 
     public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ 

@@ -15,3 +15,6 @@ test:
 	java main ../tests/if_notequals_expect_1.txt
 	java main ../tests/arithmetic_exp_3.txt
 	java main ../tests/increment_expect_2.txt
+	java main ../tests/increment_in_exp_expected_1.txt
+	java main ../tests/decrement_expect_1.txt
+	java main ../tests/decrement_in_exp_1.txt

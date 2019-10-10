@@ -87,13 +87,13 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIncrement(simpleCalcParser.IncrementContext ctx) { }
+	@Override public void enterUnary(simpleCalcParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIncrement(simpleCalcParser.IncrementContext ctx) { }
+	@Override public void exitUnary(simpleCalcParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -279,6 +279,18 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDecrement(simpleCalcParser.DecrementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecrement(simpleCalcParser.DecrementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConstant(simpleCalcParser.ConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -286,6 +298,18 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConstant(simpleCalcParser.ConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIncrement(simpleCalcParser.IncrementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIncrement(simpleCalcParser.IncrementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

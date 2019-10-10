@@ -77,17 +77,17 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitAssign(simpleCalcParser.AssignContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Increment}
+	 * Enter a parse tree produced by the {@code Unary}
 	 * labeled alternative in {@link simpleCalcParser#stat}.
 	 * @param ctx the parse tree
 	 */
-	void enterIncrement(simpleCalcParser.IncrementContext ctx);
+	void enterUnary(simpleCalcParser.UnaryContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Increment}
+	 * Exit a parse tree produced by the {@code Unary}
 	 * labeled alternative in {@link simpleCalcParser#stat}.
 	 * @param ctx the parse tree
 	 */
-	void exitIncrement(simpleCalcParser.IncrementContext ctx);
+	void exitUnary(simpleCalcParser.UnaryContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Equals}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
@@ -269,6 +269,18 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitSubtraction(simpleCalcParser.SubtractionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code Decrement}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecrement(simpleCalcParser.DecrementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Decrement}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecrement(simpleCalcParser.DecrementContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Constant}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
@@ -280,6 +292,18 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConstant(simpleCalcParser.ConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Increment}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncrement(simpleCalcParser.IncrementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Increment}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncrement(simpleCalcParser.IncrementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link simpleCalcParser#exp}.

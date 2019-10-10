@@ -16,7 +16,7 @@ stat:
 	// |  if 						# If_else_stat
 	| 'while' '(' c=condition ')' b1=block 			# While_stat
 	| x=ID '=' e=exp ';' 					# Assign
-	| x=ID '++' ';'				 		# Increment
+	| e=exp ';'				 		# Unary
 	//| '{' ss+=stat* '}'					# Block
 ;
 
@@ -39,8 +39,11 @@ condition:
 
 exp : 
 	x=ID    	      # Variable
+	| x=ID '++'	      # Increment
+	| x=ID '--'	      # Decrement
 	| f=FLOAT	      # Constant
 	| e1=exp '*' e2=exp   # Multiplication
+	//| f=FLOAT x=ID	      # Multi_NoSign 
 	| e1=exp '/' e2=exp   # Division
 	| e1=exp '+' e2=exp   # Addition
 	| e1=exp '-' e2=exp   # Subtraction
@@ -53,7 +56,7 @@ exp :
 // Lexer:
 // OPMD : ('/'|'*'); // modified
 OP : ('-'|'+') ;
-CONDOP: ( '!=' | '<' | '>' | '<=' | '>=');
+CONDOP: ( '>' | '<=' | '>=');
 BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
