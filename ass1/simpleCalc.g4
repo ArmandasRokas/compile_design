@@ -16,6 +16,7 @@ stat:
 	// |  if 						# If_else_stat
 	| 'while' '(' c=condition ')' b1=block 			# While_stat
 	| x=ID '=' e=exp ';' 					# Assign
+	| x=ID '++' ';'				 		# Increment
 	//| '{' ss+=stat* '}'					# Block
 ;
 

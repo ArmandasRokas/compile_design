@@ -51,6 +51,13 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssign(simpleCalcParser.AssignContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Increment}
+	 * labeled alternative in {@link simpleCalcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncrement(simpleCalcParser.IncrementContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Equals}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree

@@ -13,3 +13,5 @@ test:
 	java main ../tests/if_not_except_1.txt
 	java main ../tests/if_NOT_AND_expect1.txt
 	java main ../tests/if_notequals_expect_1.txt
+	java main ../tests/arithmetic_exp_3.txt
+	java main ../tests/increment_expect_2.txt
