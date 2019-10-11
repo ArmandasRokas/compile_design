@@ -327,13 +327,25 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSignedConstant(simpleCalcParser.SignedConstantContext ctx) { }
+	@Override public void enterSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSignedConstant(simpleCalcParser.SignedConstantContext ctx) { }
+	@Override public void exitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

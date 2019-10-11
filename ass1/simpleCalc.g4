@@ -43,24 +43,23 @@ exp :
 	| x=ID '--'	      # Decrement
 	| f=FLOAT	      # Constant
 	| e1=exp '*' e2=exp   # Multiplication
-	//| f=FLOAT x=ID	      # Multi_NoSign 
+	//| f=FLOAT x=ID      # Multi_NoSign 
 	| e1=exp '/' e2=exp   # Division
 	| e1=exp '+' e2=exp   # Addition
 	| e1=exp '-' e2=exp   # Subtraction
 	| '(' e=exp ')'	      # Parenthesis
-	| op=OP f=FLOAT       # SignedConstant
+	| '-' f=FLOAT         # SignedConstant_Minus
+	| '+' f=FLOAT         # SignedConstant_Plus
 	;
 
 
 
 // Lexer:
-// OPMD : ('/'|'*'); // modified
-OP : ('-'|'+') ;
+//OP : '-' | '+' ;
+//OP : '-';
 CONDOP: ( '>' | '<=' | '>=');
-BOOLCON: ('||' | '&&');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
-//BOOL : ('true' | 'false');
 ALPHA : [a-zA-Z_ÆØÅæøå] ;
 NUM   : [0-9] ;
 

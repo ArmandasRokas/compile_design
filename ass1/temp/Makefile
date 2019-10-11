@@ -18,3 +18,5 @@ test:
 	java main ../tests/increment_in_exp_expected_1.txt
 	java main ../tests/decrement_expect_1.txt
 	java main ../tests/decrement_in_exp_1.txt
+	java main ../tests/signed_const_minus_exptect_1.txt
+	java main ../tests/signedConstant_plus_expect_1.txt

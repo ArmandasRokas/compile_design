@@ -198,5 +198,12 @@ public class simpleCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSignedConstant(simpleCalcParser.SignedConstantContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx) { return visitChildren(ctx); }
 }

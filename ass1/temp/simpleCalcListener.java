@@ -317,15 +317,27 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitDivision(simpleCalcParser.DivisionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SignedConstant}
+	 * Enter a parse tree produced by the {@code SignedConstant_Minus}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterSignedConstant(simpleCalcParser.SignedConstantContext ctx);
+	void enterSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SignedConstant}
+	 * Exit a parse tree produced by the {@code SignedConstant_Minus}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitSignedConstant(simpleCalcParser.SignedConstantContext ctx);
+	void exitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
 }

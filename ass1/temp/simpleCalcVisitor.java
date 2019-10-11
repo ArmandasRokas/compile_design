@@ -191,10 +191,17 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDivision(simpleCalcParser.DivisionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SignedConstant}
+	 * Visit a parse tree produced by the {@code SignedConstant_Minus}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSignedConstant(simpleCalcParser.SignedConstantContext ctx);
+	T visitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
 }
