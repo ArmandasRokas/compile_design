@@ -20,3 +20,7 @@ test:
 	java main ../tests/decrement_in_exp_1.txt
 	java main ../tests/signed_const_minus_exptect_1.txt
 	java main ../tests/signedConstant_plus_expect_1.txt
+	java main ../tests/if_without_else_expected_1.txt
+	java main ../tests/if_greater_than_expected_1.txt
+	java main ../tests/while_less_than_equals_expected_1.txt
+	java main ../tests/while_greater_than_equals_expected_1.txt

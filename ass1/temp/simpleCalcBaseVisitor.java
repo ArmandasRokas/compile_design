@@ -37,6 +37,13 @@ public class simpleCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitIf_else_stat(simpleCalcParser.If_else_statContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitIf_stat(simpleCalcParser.If_statContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -86,6 +93,20 @@ public class simpleCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitLessThanOrEqual(simpleCalcParser.LessThanOrEqualContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitGreaterThan(simpleCalcParser.GreaterThanContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitFalseCondition(simpleCalcParser.FalseConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -114,7 +135,7 @@ public class simpleCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoolCondition(simpleCalcParser.BoolConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGeaterThanOrEqual(simpleCalcParser.GeaterThanOrEqualContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

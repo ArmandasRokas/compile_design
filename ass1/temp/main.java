@@ -140,7 +140,34 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		} else {
 			return Double.valueOf(0);
 		}
+	}; 
+	
+	public Double visitLessThanOrEqual(simpleCalcParser.LessThanOrEqualContext ctx){ 
+		if(visit(ctx.e1) <= visit(ctx.e2)){
+			return Double.valueOf(1);
+		} else {
+			return Double.valueOf(0);
+		}
+	}; 
+	
+	public Double visitGeaterThanOrEqual(simpleCalcParser.GeaterThanOrEqualContext ctx){ 
+		if(visit(ctx.e1) >= visit(ctx.e2)){
+			return Double.valueOf(1);
+		} else {
+			return Double.valueOf(0);
+		}
+	}; 
+
+
+
+	public Double visitGreaterThan(simpleCalcParser.GreaterThanContext ctx){ 
+		if(visit(ctx.e1) > visit(ctx.e2)){
+			return Double.valueOf(1);
+		} else {
+			return Double.valueOf(0);
+		}
 	};
+
 	
 	public Double visitTrueCondition(simpleCalcParser.TrueConditionContext ctx){
 	       	return Double.valueOf(1); 
@@ -170,7 +197,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		}	
 	};
 
-    	public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
+    	//public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
     	
 
     public Double visitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx){ 
@@ -235,7 +262,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    return visit(ctx.c); 
     };
 
-    public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
+    public Double visitIf_else_stat(simpleCalcParser.If_else_statContext ctx){ 
 	    Double c = visit(ctx.c);
 	    if(c.equals(1.0)){
 		return visit(ctx.b1);
@@ -243,6 +270,18 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		return visit(ctx.b2);
 	    }
     };
+    
+    public Double visitIf_stat(simpleCalcParser.If_statContext ctx){ 
+	    Double c = visit(ctx.c);
+	    if(c.equals(1.0)){
+		return visit(ctx.b1);
+	    } else{
+		return Double.valueOf(0);
+	    }
+	    
+ 
+    };
+
 
 
     public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ 
@@ -252,7 +291,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		 c = visit(ctx.c); 
 	    }
 	    
-	    return null; // Hvad skal man returere her? 
+	    return null;  
     }; 
 }
 

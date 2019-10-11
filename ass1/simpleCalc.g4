@@ -12,24 +12,24 @@ block :
 	;	
 
 stat:
-	'if' '(' c=condition  ')' b1=block 'else' b2=block 	# If_stat
-	// |  if 						# If_else_stat
+	'if' '(' c=condition  ')' b1=block 'else' b2=block 	# If_else_stat
+        |  'if' '(' c=condition ')' b1=block  		        # If_stat
 	| 'while' '(' c=condition ')' b1=block 			# While_stat
 	| x=ID '=' e=exp ';' 					# Assign
 	| e=exp ';'				 		# Unary
-	//| '{' ss+=stat* '}'					# Block
 ;
 
 condition: 
-	//|b=BOOL 				# BoolConst
-	ce1=exp co=CONDOP ce2=exp 		# BoolCondition	
-	| '(' c=condition ')'			# ParenthCondition
+	 '(' c=condition ')'			# ParenthCondition
 	| '!' c=condition 			# NotCondition
 	| c1=condition '&&' c2=condition	# AndCondition
 	| c1=condition '||' c2=condition	# OrCondition
 	| e1=exp '==' e2=exp			# Equals
 	| e1=exp '!=' e2=exp			# NotEquals
 	| e1=exp '<'  e2=exp			# LessThan
+	| e1=exp '>'  e2=exp			# GreaterThan
+	| e1=exp '<=' e2=exp			# LessThanOrEqual
+	| e1=exp '>=' e2=exp			# GeaterThanOrEqual
 	|'true'					# TrueCondition
 	| 'false'				# FalseCondition
 	;
@@ -43,7 +43,6 @@ exp :
 	| x=ID '--'	      # Decrement
 	| f=FLOAT	      # Constant
 	| e1=exp '*' e2=exp   # Multiplication
-	//| f=FLOAT x=ID      # Multi_NoSign 
 	| e1=exp '/' e2=exp   # Division
 	| e1=exp '+' e2=exp   # Addition
 	| e1=exp '-' e2=exp   # Subtraction
@@ -55,9 +54,6 @@ exp :
 
 
 // Lexer:
-//OP : '-' | '+' ;
-//OP : '-';
-CONDOP: ( '>' | '<=' | '>=');
 ID    : ALPHA (ALPHA|NUM)* ;
 FLOAT : ( NUM+ ('.' NUM+)?) ;
 ALPHA : [a-zA-Z_ÆØÅæøå] ;

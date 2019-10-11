@@ -30,6 +30,13 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultiStat(simpleCalcParser.MultiStatContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code If_else_stat}
+	 * labeled alternative in {@link simpleCalcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_else_stat(simpleCalcParser.If_else_statContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code If_stat}
 	 * labeled alternative in {@link simpleCalcParser#stat}.
 	 * @param ctx the parse tree
@@ -79,6 +86,20 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNotCondition(simpleCalcParser.NotConditionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code LessThanOrEqual}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLessThanOrEqual(simpleCalcParser.LessThanOrEqualContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GreaterThan}
+	 * labeled alternative in {@link simpleCalcParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGreaterThan(simpleCalcParser.GreaterThanContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code FalseCondition}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree
@@ -107,12 +128,12 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOrCondition(simpleCalcParser.OrConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code BoolCondition}
+	 * Visit a parse tree produced by the {@code GeaterThanOrEqual}
 	 * labeled alternative in {@link simpleCalcParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBoolCondition(simpleCalcParser.BoolConditionContext ctx);
+	T visitGeaterThanOrEqual(simpleCalcParser.GeaterThanOrEqualContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code NotEquals}
 	 * labeled alternative in {@link simpleCalcParser#condition}.

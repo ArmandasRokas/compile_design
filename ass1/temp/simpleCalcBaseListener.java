@@ -51,6 +51,18 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIf_else_stat(simpleCalcParser.If_else_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_else_stat(simpleCalcParser.If_else_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIf_stat(simpleCalcParser.If_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -135,6 +147,30 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLessThanOrEqual(simpleCalcParser.LessThanOrEqualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLessThanOrEqual(simpleCalcParser.LessThanOrEqualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGreaterThan(simpleCalcParser.GreaterThanContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGreaterThan(simpleCalcParser.GreaterThanContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFalseCondition(simpleCalcParser.FalseConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -183,13 +219,13 @@ public class simpleCalcBaseListener implements simpleCalcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoolCondition(simpleCalcParser.BoolConditionContext ctx) { }
+	@Override public void enterGeaterThanOrEqual(simpleCalcParser.GeaterThanOrEqualContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBoolCondition(simpleCalcParser.BoolConditionContext ctx) { }
+	@Override public void exitGeaterThanOrEqual(simpleCalcParser.GeaterThanOrEqualContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
