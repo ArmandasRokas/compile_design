@@ -1,11 +1,7 @@
-// ASK1: Hvordan kan jeg tillade block i block?
-// ASK2: should I make seperate alternative for 'if' withuot else? Or how should  øelse' be implemented 
- 
 grammar simpleCalc;
 
 start   : b=block  e=exp EOF ; 
 
-// skal udkommenteres
 block : 
 	s=stat 			# OneStat	// visit s
 	| '{' ss+=stat* '}' 	# MultiStat 	// visit all in the list 
@@ -17,7 +13,7 @@ stat:
 	| 'while' '(' c=condition ')' b1=block 			# While_stat
 	| x=ID '=' e=exp ';' 					# Assign
 	| e=exp ';'				 		# Unary
-;
+	;
 
 condition: 
 	 '(' c=condition ')'			# ParenthCondition
@@ -30,7 +26,7 @@ condition:
 	| e1=exp '>'  e2=exp			# GreaterThan
 	| e1=exp '<=' e2=exp			# LessThanOrEqual
 	| e1=exp '>=' e2=exp			# GeaterThanOrEqual
-	|'true'					# TrueCondition
+	| 'true'				# TrueCondition
 	| 'false'				# FalseCondition
 	;
 
