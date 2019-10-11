@@ -195,10 +195,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 		} else {	
 			return Double.valueOf(0.0);
 		}	
-	};
-
-    	//public Double visitBoolCondition(simpleCalcParser.BoolConditionContext ctx){ return Double.valueOf(-1); };
-    	
+	};	
 
     public Double visitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx){ 
 	    Double d =  Double.parseDouble(ctx.f.getText()); 

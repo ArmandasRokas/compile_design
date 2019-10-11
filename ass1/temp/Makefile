@@ -24,3 +24,4 @@ test:
 	java main ../tests/if_greater_than_expected_1.txt
 	java main ../tests/while_less_than_equals_expected_1.txt
 	java main ../tests/while_greater_than_equals_expected_1.txt
+	java main ../tests/expression_with_three_plus_sign_expected_1.txt
