@@ -212,7 +212,22 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 
     };
     
-    public Double visitIncrement(simpleCalcParser.IncrementContext ctx){ 
+    public Double visitIncrement_Postfix(simpleCalcParser.Increment_PostfixContext ctx){ 
+	    	String varname = ctx.x.getText();
+		
+		Double d = env.get(varname);
+		if (d==null){
+			System.err.println("Variable " + varname + " is not defined. \n");
+			System.exit(-1);
+		}
+		Double ed = d;	
+		ed++;
+		env.put(varname, ed);
+
+		return d; // the old value of variable should be returned	
+    };
+
+	public Double visitIncrement_Prefix(simpleCalcParser.Increment_PrefixContext ctx){ 
 	    	String varname = ctx.x.getText();
 		
 		Double d = env.get(varname);
@@ -230,7 +245,9 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
     };
 
 
-    public Double visitDecrement(simpleCalcParser.DecrementContext ctx){ 
+
+
+    public Double visitDecrement_Postfix(simpleCalcParser.Decrement_PostfixContext ctx){ 
 	    	String varname = ctx.x.getText();
 		
 		Double d = env.get(varname);
@@ -238,12 +255,29 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 			System.err.println("Variable " + varname + " is not defined. \n");
 			System.exit(-1);
 		}
+
+		Double ed = d;	
+		ed--;
+		env.put(varname, ed);
+
+		return d; // the old value of variable should be returned
+    };
+	
+    public Double visitDecrement_Prefix(simpleCalcParser.Decrement_PrefixContext ctx){ 
+	    	String varname = ctx.x.getText();
 		
+		Double d = env.get(varname);
+		if (d==null){
+			System.err.println("Variable " + varname + " is not defined. \n");
+			System.exit(-1);
+		}
+
 		d--;
 		env.put(varname, d);
 
-		return d;
+		return d; // the old value of variable should be returned
     };
+
 
     public Double visitNotCondition(simpleCalcParser.NotConditionContext ctx){ 
 	    if(visit(ctx.c).equals(1.0)){

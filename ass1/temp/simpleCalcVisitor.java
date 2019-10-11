@@ -149,13 +149,6 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAndCondition(simpleCalcParser.AndConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Parenthesis}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParenthesis(simpleCalcParser.ParenthesisContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Multiplication}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
@@ -177,19 +170,12 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(simpleCalcParser.VariableContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Subtraction}
+	 * Visit a parse tree produced by the {@code Increment_Prefix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubtraction(simpleCalcParser.SubtractionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Decrement}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDecrement(simpleCalcParser.DecrementContext ctx);
+	T visitIncrement_Prefix(simpleCalcParser.Increment_PrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Constant}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
@@ -198,12 +184,47 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConstant(simpleCalcParser.ConstantContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Increment}
+	 * Visit a parse tree produced by the {@code Decrement_Postfix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIncrement(simpleCalcParser.IncrementContext ctx);
+	T visitDecrement_Postfix(simpleCalcParser.Decrement_PostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Decrement_Prefix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecrement_Prefix(simpleCalcParser.Decrement_PrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Parenthesis}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesis(simpleCalcParser.ParenthesisContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Subtraction}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubtraction(simpleCalcParser.SubtractionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Increment_Postfix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncrement_Postfix(simpleCalcParser.Increment_PostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
@@ -218,11 +239,4 @@ public interface simpleCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code SignedConstant_Plus}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
 }

@@ -35,8 +35,10 @@ condition:
 
 exp : 
 	x=ID    	      # Variable
-	| x=ID '++'	      # Increment
-	| x=ID '--'	      # Decrement
+	| x=ID '++'	      # Increment_Postfix
+	| x=ID '--'	      # Decrement_Postfix
+	| '++' x=ID 	      # Increment_Prefix
+	| '--' x=ID 	      # Decrement_Prefix 
 	| f=FLOAT	      # Constant
 	| e1=exp '*' e2=exp   # Multiplication
 	| e1=exp '/' e2=exp   # Division

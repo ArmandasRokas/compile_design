@@ -245,18 +245,6 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitAndCondition(simpleCalcParser.AndConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Parenthesis}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenthesis(simpleCalcParser.ParenthesisContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Parenthesis}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenthesis(simpleCalcParser.ParenthesisContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code Multiplication}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
@@ -293,29 +281,17 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitVariable(simpleCalcParser.VariableContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Subtraction}
+	 * Enter a parse tree produced by the {@code Increment_Prefix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubtraction(simpleCalcParser.SubtractionContext ctx);
+	void enterIncrement_Prefix(simpleCalcParser.Increment_PrefixContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Subtraction}
+	 * Exit a parse tree produced by the {@code Increment_Prefix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubtraction(simpleCalcParser.SubtractionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Decrement}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterDecrement(simpleCalcParser.DecrementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Decrement}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitDecrement(simpleCalcParser.DecrementContext ctx);
+	void exitIncrement_Prefix(simpleCalcParser.Increment_PrefixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Constant}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
@@ -329,17 +305,77 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 */
 	void exitConstant(simpleCalcParser.ConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Increment}
+	 * Enter a parse tree produced by the {@code Decrement_Postfix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterIncrement(simpleCalcParser.IncrementContext ctx);
+	void enterDecrement_Postfix(simpleCalcParser.Decrement_PostfixContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Increment}
+	 * Exit a parse tree produced by the {@code Decrement_Postfix}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitIncrement(simpleCalcParser.IncrementContext ctx);
+	void exitDecrement_Postfix(simpleCalcParser.Decrement_PostfixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Decrement_Prefix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecrement_Prefix(simpleCalcParser.Decrement_PrefixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Decrement_Prefix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecrement_Prefix(simpleCalcParser.Decrement_PrefixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SignedConstant_Plus}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Parenthesis}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthesis(simpleCalcParser.ParenthesisContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Parenthesis}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthesis(simpleCalcParser.ParenthesisContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Subtraction}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubtraction(simpleCalcParser.SubtractionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Subtraction}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubtraction(simpleCalcParser.SubtractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Increment_Postfix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncrement_Postfix(simpleCalcParser.Increment_PostfixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Increment_Postfix}
+	 * labeled alternative in {@link simpleCalcParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncrement_Postfix(simpleCalcParser.Increment_PostfixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link simpleCalcParser#exp}.
@@ -364,16 +400,4 @@ public interface simpleCalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSignedConstant_Minus(simpleCalcParser.SignedConstant_MinusContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code SignedConstant_Plus}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code SignedConstant_Plus}
-	 * labeled alternative in {@link simpleCalcParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitSignedConstant_Plus(simpleCalcParser.SignedConstant_PlusContext ctx);
 }
