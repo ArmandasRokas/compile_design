@@ -36,8 +36,6 @@ public class main {
 
 	// Construct an interpreter and run it on the parse tree
 	Interpreter interpreter = new Interpreter();
-	//AST result = interpreter.visit(parseTree);
-	//System.out.println("The result is: "+ result.eval(new Environment()));
 
 	Double result=interpreter.visit(parseTree);
 	System.out.println("The result is: "+result);
@@ -278,8 +276,6 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements simpleCalc
 	    
  
     };
-
-
 
     public Double visitWhile_stat(simpleCalcParser.While_statContext ctx){ 
 	    Double c = visit(ctx.c);
