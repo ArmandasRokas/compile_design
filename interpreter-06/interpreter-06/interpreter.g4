@@ -21,7 +21,7 @@ expr	: expr '*' expr # Multiplication
 	| ID            # Variable
 	| '(' expr ')'  # Parenthesis
 	| ID '(' exprs ')' # FunctionCall
-	| 'if' expr 'then' expr 'else' expr # Conditional
+| 'if' expr 'then' expr 'else' expr # Conditional
 	;
 
 exprs   : expr (',' expr)* ;

@@ -39,7 +39,7 @@ public class main {
 
 	// A maker for an Abstract Syntax Tree (AST) 
 	ASTMaker astmaker = new ASTMaker();
-	AST ast=astmaker.visit(parseTree);
+	AST ast = astmaker.visit(parseTree);
 
 	System.out.println("The result is: "+ast.eval(new Environment(), new FunEnvironment()));
     }

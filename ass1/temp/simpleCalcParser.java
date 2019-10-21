@@ -96,6 +96,7 @@ public class simpleCalcParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
 	public static class StartContext extends ParserRuleContext {
 		public BlockContext b;
 		public ExpContext e;
