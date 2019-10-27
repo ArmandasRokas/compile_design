@@ -39,9 +39,19 @@ public class main {
 
 	// A maker for an Abstract Syntax Tree (AST) 
 	ASTMaker astmaker = new ASTMaker();
-	AST ast = astmaker.visit(parseTree);
+	AST ast=astmaker.visit(parseTree);
 
-	System.out.println("The result is: "+ast.eval(new Environment(), new FunEnvironment()));
+	System.out.println("Type checking in progress...\n");
+
+	Type t=ast.check(new Environment(), new FunEnvironment());
+
+    if (t==null){
+	faux.error("Type error\n");
+    }
+    
+    System.out.println("Program is type correct!\n");
+    
+    System.out.println("The result is: "+ast.eval(new Environment(), new FunEnvironment()));
     }
 }
 
@@ -54,7 +64,7 @@ class ASTMaker extends AbstractParseTreeVisitor<AST> implements interpreterVisit
 	for( interpreterParser.FunContext fc : ctx.fun()){
 	    fs.add((Fun)visit(fc));
 	}
-	return new Start(fs,(Expr)visit(ctx.expr()));
+	return new Start(fs,(Expr)visit(ctx.expr())); // For example, if expresion is constant (e.g. 0.2). So the (Expr)visit(ctx.expr()) function will create new Constant(). So when e.eval is called in Start return, so it will call eval() in Consant class, that returns Value and will be used toString method in Value class to print the value to result.  
     };
     
     public AST visitFun(interpreterParser.FunContext ctx){
@@ -70,6 +80,9 @@ class ASTMaker extends AbstractParseTreeVisitor<AST> implements interpreterVisit
     };
     public AST visitBooldec(interpreterParser.BooldecContext ctx){
 	return new TypeID(Type.BOOLTYPE,ctx.ID().getText());
+    };
+    public AST visitFloatdec(interpreterParser.FloatdecContext ctx){
+	return new TypeID(Type.FLOATTYPE,ctx.ID().getText()); // *** Modified ** 
     };
     public AST visitTypeids(interpreterParser.TypeidsContext ctx){
 	faux.error("This function should not be called.");
@@ -93,6 +106,9 @@ class ASTMaker extends AbstractParseTreeVisitor<AST> implements interpreterVisit
     };
     public AST visitConstant(interpreterParser.ConstantContext ctx){
 	return new Constant(new Value(Type.INTTYPE,Integer.parseInt(ctx.getText()))); 
+    };
+    public AST visitFloatConst(interpreterParser.FloatConstContext ctx){
+	return new Constant(new Value(Type.FLOATTYPE,Double.valueOf(ctx.getText()))); 
     };
     public AST visitConditional(interpreterParser.ConditionalContext ctx){
 	return new Conditional((Expr) visit(ctx.expr(0)), (Expr) visit(ctx.expr(1)),(Expr) visit(ctx.expr(2)) );
