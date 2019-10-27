@@ -1,5 +1,5 @@
 float getNum(float num) = num 
 
-getNum(4)
+getNum(1.0)
 // 0.2
 

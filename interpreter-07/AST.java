@@ -149,7 +149,7 @@ class Constant extends Expr{
 	return v;
     }
     public Type check(Environment env, FunEnvironment fenv){
-	return v.valuetype;
+	return v.valuetype; 
     }
 }
 
@@ -266,15 +266,10 @@ class FunctionCall extends Expr{
 
     public Value eval(Environment env, FunEnvironment fenv){
 	Fun fundef=fenv.getFunction(fname);
-	//if (parameters.size()!=fundef.parameters.size()){
-	//    faux.error("Wrong number of parameters\n");
-	//}
 	Environment newenv=new Environment();
 	for(int i=0; i<parameters.size(); i++){
 	    Value v=parameters.get(i).eval(env,fenv);
-	    //	    if (v.valuetype!= fundef.parameters.get(i).valuetype)
-	    //	faux.error("Wrong type in argument\n");
-	    newenv.setVariable( fundef.parameters.get(i).ident , v);
+	    newenv.setVariable( fundef.parameters.get(i).ident , v); // sets "num" variable (if the function signature is getNum(float num)) equals to value passed to the function 
 	}
 	return fundef.e.eval(newenv,fenv);
     }
@@ -285,10 +280,15 @@ class FunctionCall extends Expr{
 	    faux.error(String.format("Wrong number of parameters in function call: %s \n", fundef.typeid.ident));
 	}
 	for(int i=0; i<parameters.size(); i++){
-	    Type t=parameters.get(i).check(env,fenv);
+	    Type t=parameters.get(i).check(env,fenv); // Calls check in new Constant, if a number is entered
 	    if (t!= fundef.parameters.get(i).valuetype)
-		faux.error("Wrong type in argument in function\n" + fundef.typeid.ident );
-	}
+            if(fundef.parameters.get(i).valuetype == Type.FLOATTYPE 
+                &&  t == Type.INTTYPE ){
+                parameters.set(i, new Constant(new Value(Type.FLOATTYPE, Double.valueOf(parameters.get(i).eval(null, null).toString())))); // type casting. Needs to call .eval on parameters.get(i) in order to get Value, because it is Exp type and Exp do not have Value v.  Only Constant that has it. 
+            } else {
+                faux.error("Wrong type in an argument in a function: " + fundef.typeid.ident );
+            }
+			}
 	return fundef.typeid.valuetype;
     }
 }

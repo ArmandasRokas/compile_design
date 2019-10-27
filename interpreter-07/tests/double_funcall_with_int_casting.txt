@@ -1,0 +1,3 @@
+float getNum(float num) = num
+
+getNum(1)
