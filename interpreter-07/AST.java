@@ -167,19 +167,27 @@ class Variable extends Expr{
 class Addition extends Expr{
     public Expr e1,e2;
     Addition(Expr e1, Expr e2){ this.e1=e1; this.e2=e2; }
+    
     public Value eval(Environment env, FunEnvironment fenv){
 	Value v1=e1.eval(env,fenv);
 	Value v2=e2.eval(env,fenv);
-	//	if (v1.valuetype!=Type.INTTYPE || v2.valuetype!=Type.INTTYPE)
-	//    faux.error("Type mistake.\n");
-	return new Value(Type.INTTYPE,v1.value+v2.value);
+    if(v1.valuetype == Type.FLOATTYPE || v2.valuetype == Type.FLOATTYPE){
+        return new Value(Type.FLOATTYPE, 
+            Double.valueOf(v1.toString()) + Double.valueOf(v2.toString()));
+    } else {
+        return new Value(Type.INTTYPE,v1.value+v2.value); // TODO The problem is that value for a float is 0 and means to use double_value instead of.
+    } 
     }
+
     public Type check(Environment env, FunEnvironment fenv){
 	Type t1=e1.check(env,fenv);
 	Type t2=e2.check(env,fenv);
-	if (t1!=Type.INTTYPE || t2!=Type.INTTYPE){
+	if (t1==Type.BOOLTYPE || t2==Type.BOOLTYPE){
 	    	System.out.println("Type mistake in addition expresion\n");
 		return null;
+	}
+	if (t1==Type.FLOATTYPE || t2==Type.FLOATTYPE){
+		return Type.FLOATTYPE;
 	}
 	return Type.INTTYPE;
     }
@@ -284,7 +292,7 @@ class FunctionCall extends Expr{
 	    if (t!= fundef.parameters.get(i).valuetype)
             if(fundef.parameters.get(i).valuetype == Type.FLOATTYPE 
                 &&  t == Type.INTTYPE ){
-                parameters.set(i, new Constant(new Value(Type.FLOATTYPE, Double.valueOf(parameters.get(i).eval(null, null).toString())))); // type casting. Needs to call .eval on parameters.get(i) in order to get Value, because it is Exp type and Exp do not have Value v.  Only Constant that has it. 
+                parameters.set(i, new Constant(new Value(Type.FLOATTYPE, Double.valueOf(parameters.get(i).eval(env, fenv).toString())))); // type casting. Needs to call .eval on parameters.get(i) in order to get Value, because it is Exp type and Exp do not have Value v.  Only Constant that has it. 
             } else {
                 faux.error("Wrong type in an argument in a function: " + fundef.typeid.ident );
             }
