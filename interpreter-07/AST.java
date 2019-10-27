@@ -3,51 +3,9 @@ import java.util.Map.Entry;
 import java.util.List;
 import java.util.ArrayList;
 
-class faux{ // collection of non-OO auxiliary functions (currently just error)
-    public static void error(String msg){
-	System.err.println("Interpreter error: "+msg);
-	System.exit(-1);
-    }
-}
-
 abstract class AST{
     abstract public Value eval(Environment env, FunEnvironment fenv);
     abstract public Type check(Environment env, FunEnvironment fenv);
-}
-
-enum Type{
-    INTTYPE, BOOLTYPE, FLOATTYPE  
-}
-
-class Value {
-    public Type valuetype;
-    public int value; // for simplicity, we just implement it as an int anyway...
-    public double double_value;
-    Value(Type valuetype, int value){this.valuetype=valuetype; this.value=value;}
-    Value(Type valuetype, double value){this.valuetype=valuetype; this.double_value=value;}
-    public boolean toBool(){ return value!=0; }
-    public String toString(){
-	if (valuetype==Type.BOOLTYPE){
-	    if (value==0) return "False";
-	    return "True";
-	} else if(valuetype==Type.FLOATTYPE){ // ***modified***
-        return ""+double_value;    
-    }
-	return ""+value;
-    }
-}
-
-class TypeID extends AST{
-    public Type valuetype;
-    public String ident;
-    TypeID(Type valuetype, String ident){this.valuetype=valuetype; this.ident=ident;}
-    public Value eval(Environment env, FunEnvironment fenv){
-	faux.error("TypeID.eval should not be called!");
-	return null;
-    }
-    public Type check(Environment env, FunEnvironment fenv){
-	return null;
-    }
 }
 
 class Fun extends AST{
@@ -77,39 +35,26 @@ class Fun extends AST{
 }
 
 
-// Implementing the vtable of Mogensen's book
+class TypeID extends AST{
+    public Type valuetype;
+    public String ident;
 
-class Environment {
-    private HashMap<String,Value> variableValues = new HashMap<String,Value>();
-    public Environment() { }	
-    public void setVariable(String name, Value value) {
-	variableValues.put(name, value);
+    TypeID(Type valuetype, String ident){
+        this.valuetype=valuetype; 
+        this.ident=ident;
     }
-    
-    public Value getVariable(String name){
-	Value value = variableValues.get(name); 
-	if (value == null) faux.error("Variable not defined: "+name); 
-	return value;
+
+    public Value eval(Environment env, FunEnvironment fenv){
+	    faux.error("TypeID.eval should not be called!");
+	    return null;
     }
+
     public Type check(Environment env, FunEnvironment fenv){
-	return null;
+	    return null;
     }
 }
 
-// Implementing the ftable of Mogensen's book
 
-class FunEnvironment{
-    private HashMap<String,Fun> funDefs = new HashMap<String,Fun>();
-    public FunEnvironment() { }	
-    public void setFunction(String name, Fun f) {
-	funDefs.put(name, f);
-    }    
-    public Fun getFunction(String name){
-	Fun f = funDefs.get(name); 
-	if (f == null) faux.error("Function not defined: "+name); 
-	return f;
-    }
-}
 
 class Start extends AST{
     public List<Fun> funs;
