@@ -14,8 +14,8 @@ cocoListener.java:	coco.g4
 test:	main.class
 	java main coco_input.txt > coco_output.java
 	cat coco_output.java
-coco:	main.class
-	java main coco.coco > AST_output.java
+coco: 
+	echo "Error. Go to coco.v1.task1 directory and run make coco" 
 
 bigtest:	main.class
 	java main example/interpreter.coco > example/interpreter.java
