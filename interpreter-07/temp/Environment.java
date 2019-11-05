@@ -9,8 +9,10 @@ enum Type{
 
 class Value {
     public Type valuetype;
+
     public int value; // for simplicity, we just implement it as an int anyway...
     public double double_value;
+
     Value(Type valuetype, int value){this.valuetype=valuetype; this.value=value;}
     Value(Type valuetype, double value){this.valuetype=valuetype; this.double_value=value;}
     public boolean toBool(){ return value!=0; }

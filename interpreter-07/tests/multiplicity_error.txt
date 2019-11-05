@@ -1,0 +1,4 @@
+int multiAdd(int num) = if 1==1 then num + num else num
+
+//multiAdd(2*2+2)
+2

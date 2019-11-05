@@ -11,7 +11,7 @@ fun     : typeid '(' typeids ')' '=' expr ;
 typeid  : 'int' ID     # Integerdec
         | 'bool' ID    # Booldec
         | 'float' ID   # Floatdec
-	;
+	    ;
 
 typeids : typeid (',' typeid)* ;
 

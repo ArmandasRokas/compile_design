@@ -41,7 +41,7 @@ public class main {
 	ASTMaker astmaker = new ASTMaker();
 	AST ast=astmaker.visit(parseTree);
 
-	System.out.println("Type checking in progress...\n");
+	System.out.println("Type checking in progress...");
 
 	Type t=ast.check(new Environment(), new FunEnvironment());
 
@@ -49,9 +49,9 @@ public class main {
 	faux.error("Type error\n");
     }
     
-    System.out.println("Program is type correct!\n");
+    System.out.println("Program is type correct!");
     
-    System.out.println("The result is: "+ast.eval(new Environment(), new FunEnvironment()));
+    System.out.println("The result is: "+ast.eval(new Environment(), new FunEnvironment()) + "\n");
     }
 }
 
@@ -64,7 +64,7 @@ class ASTMaker extends AbstractParseTreeVisitor<AST> implements interpreterVisit
 	for( interpreterParser.FunContext fc : ctx.fun()){
 	    fs.add((Fun)visit(fc));
 	}
-	return new Start(fs,(Expr)visit(ctx.expr())); // For example, if expresion is constant (e.g. 0.2). So the (Expr)visit(ctx.expr()) function will create new Constant(). So when e.eval is called in Start return, so it will call eval() in Consant class, that returns Value and will be used toString method in Value class to print the value to result.  
+	return new Start(fs,(Expr)visit(ctx.expr())); // For example, if expresion is constant (e.g. 0.2). So the (Expr)visit(ctx.expr()) function will create new Constant(new Value(Type.FLOATTYPE,Double.valueOf(ctx.getText()). So when e.eval is called in Start return, so it will call eval() in Consant class, that returns Value and will be used toString method in Value class to print the value to result.  
     };
     
     public AST visitFun(interpreterParser.FunContext ctx){

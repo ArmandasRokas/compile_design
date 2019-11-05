@@ -1,0 +1,3 @@
+float twoTimes(float num) = num * 2
+
+twoTimes(0.5)
