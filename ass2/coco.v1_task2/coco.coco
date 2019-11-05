@@ -1,0 +1,50 @@
+DATA Start WITH { String translate() } 
+    = StartImpl(List<DataTypeDef> datatypedefs) {
+    String output = "import java.util.*;\nimport java.util.HashMap;\nimport java.util.Map.Entry;\nimport java.util.List;\nimport java.util.ArrayList;\nabstract class AST{}";
+    for(DataTypeDef d: datatypedefs){ 
+        output += d.translate(); } 
+    return output;}
+;
+
+DATA DataTypeDef WITH { String translate() }
+    =  DataTypeDefImpl(String dataTypeName, String functionHead, List<Alternative> alternatives) {
+        String output = "\nabstract class " + dataTypeName + " extends AST{\n" + "\tpublic abstract " + functionHead + " ;\n };";
+        for(Alternative a: alternatives){
+output += a.translate(this);
+        }
+        return output;}
+;
+
+DATA Alternative WITH { String translate(AST parent)}
+    = AlternativeImpl(String constructor, List<ArgumentImpl> arguments,  String code)
+        {
+        DataTypeDefImpl dataTypeDef = (DataTypeDefImpl) parent;
+        char openBracket = '{';
+        char closeBracket = '}';
+        String output = "\nclass " + constructor + " extends " +dataTypeDef.dataTypeName +" "+ openBracket + " \n";
+        for(ArgumentImpl a: arguments){
+            output += "\t";
+            output += a.translate();
+            output += ";\n";
+        }
+        output += "\n";
+        output += "\t"+ constructor + "(" ;
+        for(int i = 0; i < arguments.size(); i++){
+            output += arguments.get(i).translate();
+            if(i < arguments.size() - 1) output += " , ";
+        }
+        output += ")" + openBracket;
+        for(ArgumentImpl a: arguments){
+            output+= "this." + a.name + "=" + a.name + "; ";
+        }
+        output += closeBracket + "\n";
+        output += "\tpublic " + dataTypeDef.functionHead + " " + code;
+        output += "\n"+ closeBracket ;
+	    return output;
+}
+;
+
+DATA Argument WITH {String translate()}
+    = ArgumentImpl(String type, String name) {String output = ""; return type + " " + name; }
+;
+
