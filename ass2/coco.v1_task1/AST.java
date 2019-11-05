@@ -11,7 +11,6 @@ class faux{ // collection of non-OO auxiliary functions (currently just error)
 }
 
 abstract class AST{
-    //public abstract String translate();
 }
 
 class Start extends AST{
@@ -27,7 +26,6 @@ class Start extends AST{
             output += d.translate();
         }
 	    return output;
-	// You may start here by replacing this with something else
     }
 }
 
@@ -47,11 +45,9 @@ class DataTypeDef extends AST{
                 "\tpublic abstract " + functionHead + " ;\n };";
         
         for(Alternative a: alternatives){
-            //output += a.translate(dataTypeName, functionHead);
             output += a.translate(this);
         }
 	    return output;
-	    // You may start here by replacing this with something else
     }
 }
 
@@ -66,7 +62,6 @@ class Alternative extends AST{
 	this.code=code;
     }
 
-    //public String translate(String dataTypeName, String functionHead){
     public String translate(AST parent){
         DataTypeDef dataTypeDef = (DataTypeDef) parent;
         char openBracket = '{';
@@ -100,6 +95,5 @@ class Argument extends AST{
     Argument(String type, String name){this.type=type; this.name=name;}
     public String translate(){
 	    return type + " " + name;
-	// You may start here by replacing this with something else
     }
 }

@@ -25,4 +25,5 @@ clean:
 	rm -f *.class
 	rm -f $(GENERATED)
 	rm -f *.tokens
+	rm -f *.interp
 	cd example ; make clean
