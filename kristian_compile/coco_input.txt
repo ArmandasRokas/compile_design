@@ -1,0 +1,70 @@
+// Example: Expressions Interpreter
+DATA AST    WITH {import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.List;
+import java.util.ArrayList;
+
+class faux{ // collection of non-OO auxiliary functions (currently just error)
+    public static void error(String msg){
+	System.err.println("Interpreter error: "+msg);
+	System.exit(-1);
+    }
+}
+
+abstract class AST{
+}}
+= AST(int i)     {code}
+;
+
+DATA Start                               WITH {String translate()}
+= Start(List<DataTypeDef> datatypedefs)     {
+        String s = "";
+        for (DataTypeDef dataTypeDef : datatypedefs) {
+            s += dataTypeDef.translate();
+        }
+        return ""+
+            s;
+    }
+;
+
+
+DATA Start          WITH {Type typecheck()}
+= Start(expr e)                     {return e.typecheck();}
+;
+DATA expr           WITH { Type typecheck()}
+= Constant(Integer v)     { return Type.INTTYPE; }
+| Variable(String name)  { return Type.INTTYPE; } 
+| Multiplication(expr e1, expr e2) { 
+                 Type t1 = e1.typecheck();
+                 Type t2 = e2.typecheck();
+                 if (t1 != Type.INTTYPE || t2 != Type.INTTYPE)
+                        faux.error("Type mistake in a multiplicity expression\n");
+                 return Type.INTTYPE; }
+| Addition(expr e1, expr e2) {                  
+                 Type t1 = e1.typecheck();
+                 Type t2 = e2.typecheck();
+                 if (t1 != Type.INTTYPE || t2 != Type.INTTYPE)
+                        faux.error("Type mistake in a addition expression\n");
+                 return Type.INTTYPE;  }
+| Comparison(expr e1, expr e2) { 
+                 Type t1 = e1.typecheck();
+                 Type t2 = e2.typecheck();
+                 if (t1 != Type.INTTYPE || t2 != Type.INTTYPE)
+                        faux.error("Type mistake in a comparison expression\n");
+                 return Type.BOOLTYPE;
+}
+| EmptyArray( expr e1 ) {return Type.LISTTYPE;}
+| Array(List<expr> es) {
+                for(expr e: es)
+                    if(e.typecheck() != Type.INTTYPE)
+                        faux.error("Type mistake in a list");
+                return Type.LISTTYPE;
+                }
+| ConcatArray (expr e1, expr e2) {
+                 Type t1 = e1.typecheck();
+                 Type t2 = e2.typecheck();
+                 if (t1 != Type.LISTTYPE || t2 != Type.LISTTYPE)
+                        faux.error("Type mistake in an array concatenation expression\n");
+                 return Type.LISTTYPE;
+    }  
+;
