@@ -23,5 +23,5 @@ public class regexBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNum(regexParser.NumContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpr(regexParser.ExprContext ctx) { return visitChildren(ctx); }
 }

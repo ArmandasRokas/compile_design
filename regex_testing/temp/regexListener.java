@@ -17,13 +17,13 @@ public interface regexListener extends ParseTreeListener {
 	 */
 	void exitStart(regexParser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link regexParser#num}.
+	 * Enter a parse tree produced by {@link regexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterNum(regexParser.NumContext ctx);
+	void enterExpr(regexParser.ExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link regexParser#num}.
+	 * Exit a parse tree produced by {@link regexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitNum(regexParser.NumContext ctx);
+	void exitExpr(regexParser.ExprContext ctx);
 }

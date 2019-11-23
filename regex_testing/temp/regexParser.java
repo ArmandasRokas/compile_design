@@ -16,24 +16,29 @@ public class regexParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		HEXDEC=1, WHITESPACE=2, COMMENT=3, COMMENT2=4, COMMENT3=5;
+		PERIOD=1, DATE=2, YEAR=3, MONTH29=4, MONTH30=5, MONTH31=6, MONTH=7, DAY29=8, 
+		DAY30=9, DAY31=10, ESCAPEDSTRING=11, WHITESPACE=12, COMMENT=13, COMMENT2=14, 
+		COMMENT3=15;
 	public static final int
-		RULE_start = 0, RULE_num = 1;
+		RULE_start = 0, RULE_expr = 1;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "num"
+			"start", "expr"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
+			null, null, null, null, "'02'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "HEXDEC", "WHITESPACE", "COMMENT", "COMMENT2", "COMMENT3"
+			null, "PERIOD", "DATE", "YEAR", "MONTH29", "MONTH30", "MONTH31", "MONTH", 
+			"DAY29", "DAY30", "DAY31", "ESCAPEDSTRING", "WHITESPACE", "COMMENT", 
+			"COMMENT2", "COMMENT3"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -88,8 +93,8 @@ public class regexParser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public NumContext num() {
-			return getRuleContext(NumContext.class,0);
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
 		public TerminalNode EOF() { return getToken(regexParser.EOF, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
@@ -118,7 +123,7 @@ public class regexParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(4);
-			num();
+			expr();
 			setState(5);
 			match(EOF);
 			}
@@ -134,35 +139,35 @@ public class regexParser extends Parser {
 		return _localctx;
 	}
 
-	public static class NumContext extends ParserRuleContext {
-		public TerminalNode HEXDEC() { return getToken(regexParser.HEXDEC, 0); }
-		public NumContext(ParserRuleContext parent, int invokingState) {
+	public static class ExprContext extends ParserRuleContext {
+		public TerminalNode PERIOD() { return getToken(regexParser.PERIOD, 0); }
+		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_num; }
+		@Override public int getRuleIndex() { return RULE_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof regexListener ) ((regexListener)listener).enterNum(this);
+			if ( listener instanceof regexListener ) ((regexListener)listener).enterExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof regexListener ) ((regexListener)listener).exitNum(this);
+			if ( listener instanceof regexListener ) ((regexListener)listener).exitExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof regexVisitor ) return ((regexVisitor<? extends T>)visitor).visitNum(this);
+			if ( visitor instanceof regexVisitor ) return ((regexVisitor<? extends T>)visitor).visitExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final NumContext num() throws RecognitionException {
-		NumContext _localctx = new NumContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_num);
+	public final ExprContext expr() throws RecognitionException {
+		ExprContext _localctx = new ExprContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_expr);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(7);
-			match(HEXDEC);
+			match(PERIOD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -177,9 +182,9 @@ public class regexParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\7\f\4\2\t\2\4\3\t"+
-		"\3\3\2\3\2\3\2\3\3\3\3\3\3\2\2\4\2\4\2\2\2\t\2\6\3\2\2\2\4\t\3\2\2\2\6"+
-		"\7\5\4\3\2\7\b\7\2\2\3\b\3\3\2\2\2\t\n\7\3\2\2\n\5\3\2\2\2\2";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21\f\4\2\t\2\4\3"+
+		"\t\3\3\2\3\2\3\2\3\3\3\3\3\3\2\2\4\2\4\2\2\2\t\2\6\3\2\2\2\4\t\3\2\2\2"+
+		"\6\7\5\4\3\2\7\b\7\2\2\3\b\3\3\2\2\2\t\n\7\3\2\2\n\5\3\2\2\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

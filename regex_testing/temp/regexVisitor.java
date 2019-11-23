@@ -16,9 +16,9 @@ public interface regexVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(regexParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link regexParser#num}.
+	 * Visit a parse tree produced by {@link regexParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNum(regexParser.NumContext ctx);
+	T visitExpr(regexParser.ExprContext ctx);
 }

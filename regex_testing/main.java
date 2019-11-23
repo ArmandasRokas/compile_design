@@ -51,7 +51,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements regexVisit
 	    	return Double.valueOf(1);
     	}
 
-    public Double visitNum(regexParser.NumContext ctx){	
+    public Double visitExpr(regexParser.ExprContext ctx){	
 
 	    	return Double.valueOf(1);
     	}
